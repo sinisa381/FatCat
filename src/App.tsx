@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from "react";
+import "./App.css";
+import { PersonRows } from "./components/PersonRows";
+import json from "./generated.json";
+import { Person, PersonEvent } from "./types";
 
 function App() {
+  const [state, setState] = useState<Person[]>(json);
+
+  const handleChange = useCallback(
+    (e: PersonEvent, index: number, name: string) => {
+      let value: string | boolean = e.target.value;
+
+      setState((prevState) =>
+        prevState.map((item, i) =>
+          i === index
+            ? {
+                ...item,
+                [name]:
+                  value === "inactive"
+                    ? false
+                    : value === "active"
+                    ? true
+                    : value,
+              }
+            : item,
+        ),
+      );
+    },
+    [setState],
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {state.map((person, index) => (
+          <PersonRows
+            index={index}
+            key={index}
+            person={person}
+            onChange={handleChange}
+          />
+        ))}
+      </div>
     </div>
   );
 }
