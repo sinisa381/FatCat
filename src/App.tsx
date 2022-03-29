@@ -15,28 +15,25 @@ function App() {
     estimateSize: useCallback(() => 140, []),
   });
 
-  const handleChange = useCallback(
-    (e: PersonEvent, index: number, name: string) => {
-      let value: string | boolean = e.target.value;
+  const handleChange = (e: PersonEvent, index: number, name: string) => {
+    let value: string | boolean = e.target.value;
 
-      setState((prevState) =>
-        prevState.map((item, i) =>
-          i === index
-            ? {
-                ...item,
-                [name]:
-                  value === "inactive"
-                    ? false
-                    : value === "active"
-                    ? true
-                    : value,
-              }
-            : item,
-        ),
-      );
-    },
-    [setState],
-  );
+    setState((prevState) =>
+      prevState.map((item, i) =>
+        i === index
+          ? {
+              ...item,
+              [name]:
+                value === "inactive"
+                  ? false
+                  : value === "active"
+                  ? true
+                  : value,
+            }
+          : item,
+      ),
+    );
+  };
 
   return (
     <div className="App">

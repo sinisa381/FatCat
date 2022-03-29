@@ -1,4 +1,3 @@
-// import { memo } from "react";
 import { Person } from "../../types";
 import { COL_WIDTHS } from "../../utils/size";
 
@@ -41,5 +40,4 @@ const PersonOutputs = (props: Person) => {
     </div>
   );
 };
-// export default memo(PersonOutputs);
 export default PersonOutputs;

@@ -1,4 +1,3 @@
-// import { memo } from "react";
 import { Person, PersonEvent } from "../../types";
 import { COL_WIDTHS } from "../../utils/size";
 
@@ -129,4 +128,3 @@ const PersonInputs = ({
   );
 };
 export default PersonInputs;
-// export default memo(PersonInputs);
